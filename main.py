@@ -14,14 +14,15 @@ def utility_processor():
 
 @app.route('/')
 def homepage():
-    list_array=['popular','now_playing','top_rated','upcoming']
-    selected_list=request.args.get('list_type', "popular")
+    list_array = ['popular', 'now_playing', 'top_rated', 'upcoming']
+    selected_list = request.args.get('list_type', "popular")
     if selected_list in list_array:
         pass
     else:
-        selected_list='popular'
+        selected_list = 'popular'
     movies = tmdb_client.get_movies(10, list_name=selected_list)
-    return render_template("homepage.html", movies=movies, current_list=selected_list, list_array=list_array)
+    return render_template("homepage.html", movies=movies,
+                           current_list=selected_list, list_array=list_array)
 
 
 @app.route("/movie/<movie_id>")
@@ -29,8 +30,9 @@ def movie_details(movie_id):
     details = tmdb_client.get_single_movie(movie_id)
     cast = tmdb_client.get_single_movie_cast(movie_id)[:8]
     images = tmdb_client.get_movie_images(movie_id)
-    random_image=random.choice(images['backdrops'])
-    return render_template("movie_details.html", movie=details, cast=cast, image=random_image)
+    random_image = random.choice(images['backdrops'])
+    return render_template("movie_details.html", movie=details, cast=cast,
+                           image=random_image)
 
 
 if __name__ == "__main__":
