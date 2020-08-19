@@ -1,7 +1,8 @@
 import requests
 from random import shuffle
-API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTBjZDk4NTA3MjA1NzRhOGIzZDg3OTM1NTJjYjU5ZiIsInN1YiI6IjVmMjZhNzdlZTI2M2JiMDAzNTAzYjkxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T35Q1zXh8SFzllXf41kA8iwWDr8QvOZfFpkE-wdMAYM"
+import os
 
+API_TOKEN = os.environ.get("TMDB_API_TOKEN", "")
 
 
 def call_tmdb_api(endpoint):
